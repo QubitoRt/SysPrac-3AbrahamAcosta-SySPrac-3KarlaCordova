@@ -69,7 +69,7 @@ grid on
 % Se tiene la siguiente función:
 % $f(t)=e^{-2t}u(t)$
 % con un intervalo de t de $ -1<t<5 $
-%Para eso, primero crearemos el pulso unitario, y posteriormente la función.
+% Para eso, primero crearemos el pulso unitario, y posteriormente la función.
 
 p2 = @(t) (t>=-0.5) & (t<0.5);
 t = -1:0.001:5;
@@ -77,12 +77,20 @@ fun2 = @(t) exp(-2.*t);
 f2 = fun2(t);
 
 figure
-plot (t, f2.*p2((t+1)-p2(t-5)),'m','LineWidht',2)
+plot (t, f2.*p2((t+1)-p2(t-5)),'m','LineWidth',2)
 title('f(t)=e^{-2t}u(t)')
 xlabel('t')
 grid on
 
-% 
+% Para hacer la transformada de la función utilizaremos lo el siguiente comando,
+% Utilizando un intervalo para w de -10<w<10.
+ F2 = fft(f2);
+ w = -10:0.001:10;
+ plot(w,F2,'m','LineWidth',2)
+ title('F(w)= 4/4^{2}+w^{2}')
+ xlabel('w')
+ grid on
+%
 %% Ejercicio 6.
 % El concepto de energía de una señal se determina como $$ E_f = \int_{- \infty}^{\infty}|f(t)|^2 dx$
 % 
