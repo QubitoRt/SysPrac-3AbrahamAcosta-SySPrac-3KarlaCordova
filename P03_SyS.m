@@ -53,13 +53,36 @@
 % $f:R\rightarrow R$ en el formato de su elección y pruebe
 % su código mostrando la gráfica de $F(\omega)$ vs $\omega$ en el intervalo
 % $[-2,2]$ para $a=1$, no debe
-% incluir el código, solo el uso de la función para mostrar la gráfica
 % Para realizar esto haremos lo siguiente:
+
 w = [-2:0.0001:2];
 a = 1;
-%f1 = fun1(w,a);
-%plot (w,f1,'k')  
+f1 = fun1(w,a);
+figure
+plot (w,f1,'k','LineWidth',2)
+title('F(w) = a/(a^2+w^2)')
+xlabel('\omega')
+grid on
+  
 %
+%% Ejercicio 3: 
+% Se tiene la siguiente función:
+% $f(t)=e^{-2t}u(t)$
+% con un intervalo de t de $ -1<t<5 $
+%Para eso, primero crearemos el pulso unitario, y posteriormente la función.
+
+p2 = @(t) (t>=-0.5) & (t<0.5);
+t = -1:0.001:5;
+fun2 = @(t) exp(-2.*t);
+f2 = fun2(t);
+
+figure
+plot (t, f2.*p2((t+1)-p2(t-5)),'m','LineWidht',2)
+title('f(t)=e^{-2t}u(t)')
+xlabel('t')
+grid on
+
+% 
 %% Ejercicio 6.
 % El concepto de energía de una señal se determina como $$ E_f = \int_{- \infty}^{\infty}|f(t)|^2 dx$
 % 
@@ -74,43 +97,47 @@ a = 1;
 % Encontrar la energía del siguiente par de señales _x(t)_ y _y(t)_:
 %
 %
-dt = -2:0.001:3; figure
-plot(dt, pulso((dt-1)/2), 'r', 'LineWidth', 2); grid on
+p = @(dt) (dt>=-0.5) & (dt<0.5); %Se crea una función anónima para la representaión del pulso unitario.
+dt = -2:0.001:3;
+
+
+figure
+plot(dt, p((dt-1)/2), 'r', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('x_a(t)');
 figure
-plot(dt, pulso(dt-0.5)-pulso(dt-1.5), 'r', 'LineWidth', 2); grid on
+plot(dt, p(dt-0.5)-p(dt-1.5), 'r', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('y(t)'); title('y_a(t)');
 
 dt = -2:0.001:3*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('x_b(t)');
 figure
-plot(dt, pulso((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
+plot(dt, p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('y(t)'); title('y_b(t)');
 
 dt = -2:0.001:2*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
+plot(dt, sin(dt).*p((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('x_c(t)');
 figure
-plot(dt, pulso((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
+plot(dt, p((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('y(t)'); title('y_c(t)');
 %%
 % Las señales de la forma *x(t) + y(t)* quedan:
 
 dt = -2:0.001:3; figure
-plot(dt, pulso((dt-1)/2) + pulso(dt-0.5)- pulso(dt-1.5), 'r', 'LineWidth', 2);
+plot(dt, p((dt-1)/2) + p(dt-0.5)- p(dt-1.5), 'r', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_a(t)+y_a(t)');
+xlabel('t'); title('x_a(t) + y_a(t)');
 
 dt = -2:0.001:3*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi)/(2*pi))+pulso((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
+plot(dt, sin(dt).*p((dt-pi)/(2*pi))+p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_b(t)+y_b(t)');
+xlabel('t'); title('x_b(t) + y_b(t)');
 
 dt = -2:0.001:2*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi/2)/pi)+pulso((dt-pi/2)/pi), 'g', 'LineWidth', 2);
+plot(dt, sin(dt).*p((dt-pi/2)/pi)+p((dt-pi/2)/pi), 'g', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_c(t)+y_c(t)');
+xlabel('t'); title('x_c(t) + y_c(t)');
 %%
 % Para el cálculo de la energía, el método elegido consiste en tomar como
 % vectores los trozos de la señal (uno de intervalos y el otro de las
@@ -135,19 +162,19 @@ E_c1 = energia(f_c1, A_c1)
 % Las señales de la forma *x(t) - y(t)* quedan:
 
 dt = -2:0.001:3; figure
-plot(dt, pulso((dt-1)/2) - pulso(dt-0.5) + pulso(dt-1.5), 'r', 'LineWidth', 2);
+plot(dt, p((dt-1)/2) - p(dt-0.5) + p(dt-1.5), 'r', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_a(t)-y_a(t)');
+xlabel('t'); title('x_a(t) - y_a(t)');
 
 dt = -2:0.001:3*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi)/(2*pi)) - pulso((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)) - p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_b(t)-y_b(t)');
+xlabel('t'); title('x_b(t) - y_b(t)');
 
 dt = -2:0.001:2*pi; figure
-plot(dt, sin(dt).*pulso((dt-pi/2)/pi) - pulso((dt-pi/2)/pi), 'g', 'LineWidth', 2);
+plot(dt, sin(dt).*p((dt-pi/2)/pi) - p((dt-pi/2)/pi), 'g', 'LineWidth', 2);
 grid on
-xlabel('t'); title('x_c(t)-y_c(t)');
+xlabel('t'); title('x_c(t) - y_c(t)');
 %%
 % La energía de las señales _x(t)_ - _y(t)_ es:
 Aa1 = [1 2];
@@ -188,7 +215,7 @@ E_c1 = energia(f_c1, A_c1)
 % variable simbólica _"c"_.
 %
 dt = -4:0.001:4; figure
-plot(dt, (dt.^3).*pulso(dt/4), 'y', 'LineWidth', 2); grid on
+plot(dt, (dt.^3).*p(dt/4), 'y', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('x(t)');
 %%
 % La potencia de las señal x(t )quedaría como:
@@ -199,26 +226,25 @@ T = 4;
 A = [-2 2];
 fx = [t^3]; fx = sym(fx);
 P = potencia(fx, T, A)
-%
 %%
 % Para las modificaciones de la señal x(t), podemos observar las gráficas de las señales
 % en un solo período (Nota: para la graficación de la señal número 3, se tomará el valor c = \frac{1}{2}):
 %
 figure
-plot(dt, (-dt.^3).*pulso(dt/4), 'c', 'LineWidth', 2); grid on
+plot(dt, (-dt.^3).*p(dt/4), 'c', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('- x(t)');
 figure
-plot(dt, (2*dt.^3).*pulso(dt/4), 'b', 'LineWidth', 2); grid on
+plot(dt, (2*dt.^3).*p(dt/4), 'b', 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('2x(t)');
 figure
-plot(dt, (0.5*dt.^3).*pulso(dt/4), 'LineWidth', 2); grid on
+plot(dt, (0.5*dt.^3).*p(dt/4), 'LineWidth', 2); grid on
 xlabel('t'); ylabel('x(t)'); title('c*x(t)');
 %%
 % Al calcular las potencias de las variantes de la señal x(t), éstas
 % quedan:
 %
 fx1 = [-t^3]; fx1 = sym(fx1);
-P1 = potencia(fx1, T, A1)
+P1 = potencia(fx1, T, A)
 fx2 = [2*t^3]; fx2 = sym(fx2);
 P2 = potencia(fx2, T, A)
 fx3 = [c*t^3]; fx3 = sym(fx3);
