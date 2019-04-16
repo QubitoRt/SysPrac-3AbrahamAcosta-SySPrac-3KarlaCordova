@@ -1,0 +1,637 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PR&Aacute;CTICA 3. Se&ntilde;ales en tiempo cont&iacute;nuo.</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-16"><meta name="DC.source" content="P03_SyS.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PR&Aacute;CTICA 3. Se&ntilde;ales en tiempo cont&iacute;nuo.</h1><!--introduction--><p><b>Autores:</b></p><p><b>Acosta Villa Cristian Abraham</b></p><p><b>C&oacute;rdova Fern&aacute;ndez Karla Lilia</b></p><p><b>SE&Ntilde;ALES Y SISTEMAS, Grupo 2TV1</b></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos de la pr&aacute;ctica.</a></li><li><a href="#2">Introducci&oacute;n.</a></li><li><a href="#6">Desarrollo.</a></li><li><a href="#7">Ejercicio 1:</a></li><li><a href="#8">Ejercicio 2:</a></li><li><a href="#9">Ejercicio 4.</a></li><li><a href="#14">Ejercicio 5.</a></li><li><a href="#17">Ejercicio 6.</a></li><li><a href="#22">Ejercicio 7.</a></li><li><a href="#28">Referencias.</a></li></ul></div><h2 id="1">Objetivos de la pr&aacute;ctica.</h2><div><ul><li>Manupulaci&oacute;n b&aacute;sica de MATLAB.</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas cont&iacute;nuas.</li><li>Transformaci&oacute;n de se&ntilde;ales cont&iacute;nuas (Escalamientos y traslaciones).</li><li>C&aacute;lculo de energ&iacute;a y potencia de se&ntilde;ales cont&iacute;nuas.</li></ul></div><h2 id="2">Introducci&oacute;n.</h2><p>Como sabemos, MATLAB es un sofware matem&aacute;tico, el cu&aacute;l, tiene su propio lenguaje de programaci&oacute;n (Lenguaje M), y el cu&aacute;l es multiplataforna.</p><p>Surgi&oacute; por primera vez en 1984 por Cleve Moler, con el objetivo de uaar paquetes de subrutinas escritas en <a href="https://www.ecured.cu/Fortran">Fortran</a> en los cursos de An&aacute;lisis Num&eacute;rico y &Aacute;lgebra lineal. Su lenguaje fue creado en 1970, el cu&aacute;l, proporcion&oacute; un acceso sencillo al sofware de matrices LINPACK y EISPACK, esto sin usar Fortran.</p><p>Existen otras alternativas de sofware libre como <a href="https://www.gnu.org/software/octave/">Octave</a> y <a href="https://www.python.org/">Python</a>. Octave por un lado, viene siendo el equivalente de MATLAB, ya que pose&eacute; la mayor&iacute;a de las caracter&iacute;sticas que tiene MATLAB. Por otro lado, Python un lenguaje de programaci&oacute;n multiparadigma, ya que soporta orientaci&oacute;n a objetos y programaci&acute;pon imperativa.</p><p>Si quieres saber m&aacute;s acerca de estos sofware, puedes abrir los siguientes enlaces: <a href="https://es.wikipedia.org/wiki/GNU_Octave">Caracter&iacute;sticas Octave</a> <a href="https://es.wikipedia.org/wiki/Python">Caracteristicas Python</a></p><h2 id="6">Desarrollo.</h2><h2 id="7">Ejercicio 1:</h2><p>Crea una funci&oacute;n que se llame <i>fun1</i> y reciba dos parametros <img src="P03_SyS_eq08589834809570054062.png" alt="$\omega$"> y <img src="P03_SyS_eq05508344529756732484.png" alt="$a$"> la funci&oacute;n debe regresar la evaluaci&oacute;n <img src="P03_SyS_eq01407365636722940873.png" alt="$F(\omega)=a/(a^2+\omega^2)$">, esta funci&oacute;n debe trabajar con <img src="P03_SyS_eq16064389548595522758.png" alt="$a\in R$"> y <img src="P03_SyS_eq02576817051637404792.png" alt="$t\in  R^n$">.</p><pre class="codeinput"><span class="comment">%Para este oasi s&oacute;lo se tiene que crear una nueva funci&oacute;n y escribir la ecuaci&oacute;n, esto es.</span>
+<span class="comment">% *function F = fun1 (w,a)*</span>
+<span class="comment">% *F = a/(a^2 + b^2);*</span>
+<span class="comment">% *endfunction*</span>
+<span class="comment">%</span>
+</pre><h2 id="8">Ejercicio 2:</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="P03_SyS_eq02145986785580767623.png" alt="$f:R\rightarrow R$"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de <img src="P03_SyS_eq04634431881849194213.png" alt="$F(\omega)$"> vs <img src="P03_SyS_eq08589834809570054062.png" alt="$\omega$"> en el intervalo <img src="P03_SyS_eq01169792831847459841.png" alt="$[-2,2]$"> para <img src="P03_SyS_eq13016372792947090052.png" alt="$a=1$">, no debe Para realizar esto haremos lo siguiente:</p><pre class="codeinput">w = [-2:0.0001:2];
+a = 1;
+f1 = fun1(w,a);
+figure
+plot (w,f1,<span class="string">'k'</span>,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'F(w) = a/(a^2+w^2)'</span>)
+xlabel(<span class="string">'\omega'</span>)
+grid <span class="string">on</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="P03_SyS_01.png" alt=""> <h2 id="9">Ejercicio 4.</h2><div><ul><li>Ejercicio M1.1</li></ul></div><pre class="codeinput">f = inline(<span class="string">'exp(-t).*cos(2*pi*t)'</span>, <span class="string">'t'</span>);
+t = (-2:0.01:2);
+
+<span class="comment">% M1.1 con funci&oacute;n an&oacute;nima</span>
+f = @(t) exp(-t).*cos(2*pi*t);
+figure
+plot(t, f(t), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); title(<span class="string">'f(t) = e^{-t}cos(2\pi t)'</span>);
+</pre><img vspace="5" hspace="5" src="P03_SyS_02.png" alt=""> <div><ul><li>Ejercicio M1.2</li></ul></div><pre class="codeinput">u = inline(<span class="string">'(t&gt;=0)'</span>, <span class="string">'t'</span>); <span class="comment">%escal&oacute;n</span>
+t = (-2:0.01:2);
+
+u = @(t) (t&gt;=0);
+figure
+plot(t, u(t), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u(t)'</span>); title(<span class="string">'Escal&oacute;n con funci&oacute;n an&oacute;nima'</span>);
+axis([-2 2 -0.1 1.1]);
+
+
+p = inline(<span class="string">'(t&gt;=0) &amp; (t&lt;1)'</span>, <span class="string">'t'</span>); <span class="comment">%pulso unitario</span>
+t = (-1:0.01:2);
+
+p = @(t) (t&gt;=0) &amp; (t&lt;1); <span class="comment">%pulso unitario</span>
+figure
+plot(t, p(t), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'p(t)'</span>); title(<span class="string">'Pulso unitario con funci&oacute;n an&oacute;nima'</span>);
+axis([-2 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="P03_SyS_03.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_04.png" alt=""> <div><ul><li>Ejercicio M1.3</li></ul></div><pre class="codeinput">g = inline(<span class="string">'exp(-t).*cos(2*pi*t).*(t&gt;=0)'</span>, <span class="string">'t'</span>);
+t = (-2:0.01:2);
+
+g = @(t) exp(-t).*cos(2*pi*t).*(t&gt;=0);
+figure
+plot(t, g(t), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(t)'</span>); title(<span class="string">'g(t) = e^{-t}cos(2\pi t)*(t&gt;=0)'</span>);
+figure
+plot(t, g(2*t+1), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(t)'</span>); title(<span class="string">'g(2t + 1)'</span>);
+figure
+plot(t, g(-t+1), <span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(t)'</span>); title(<span class="string">'g(-t + 1)'</span>);
+figure
+plot(t, g(2*t+1)+g(-t+1), <span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(t)'</span>); title(<span class="string">'g(2t + 1) + g(-t + 1)'</span>);
+</pre><img vspace="5" hspace="5" src="P03_SyS_05.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_06.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_07.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_08.png" alt=""> <div><ul><li>Ejercicio M1.4</li></ul></div><pre class="codeinput">x = inline(<span class="string">'exp(-t).*((t&gt;=0) &amp; (t&lt;1))'</span>, <span class="string">'t'</span>);
+t = (0:0.01:1);
+E_x = sum(x(t).*x(t)*0.01);
+x_squared = inline(<span class="string">'exp(-2*t).*((t&gt;=0) &amp; (t&lt;1))'</span>, <span class="string">'t'</span>);
+E_x = quad(x_squared, 0, 1);
+g_squared = inline(<span class="string">'exp(-2*t).*((cos(2*pi*t)).^2).*(t&gt;=0)'</span>, <span class="string">'t'</span>);
+t = (0:0.001:100);
+E_g = sum(g_squared(t)*0.001);
+E_g = quad(g_squared,0,100);
+
+<span class="comment">% Con funciones an&oacute;nimas:</span>
+x_squared = @(t) exp(-2*t).*((t&gt;=0) &amp; (t&lt;1));
+E_x = quad(x_squared, 0, 1);
+g_squared = @(t) exp(-2*t).*((cos(2*pi*t)).^2).*(t&gt;=0);
+E_g = quad(g_squared,0,100);
+E_g = sum(g_squared(t)*0.001);
+</pre><p>Como se puede notar en este ejercicio, podemos deducir que el uso de <i>inline</i> y las funciones an&oacute;nimas, es exactamente igual, la &uacute;nica diferencia es la sint&aacute;xis, donde <b>f = inline('funci&oacute;n','variable')</b> , que ser&iacute;a lo mismo a <b>f = @(variable) expresi&oacute;n</b> .</p><h2 id="14">Ejercicio 5.</h2><p>Con la se&ntilde;al x(t) mostrada a continuaci&oacute;n, graficar:</p><div><ol><li>x(t - 4)</li><li>x(t/1.5)</li><li>x(-t)</li><li>x(2t - 4)</li><li>x(2 - t)</li></ol></div><pre class="codeinput">x = @(t) (-t).*((t&gt;=-4) &amp; (t&lt;0))+t.*((t&gt;=0) &amp; (t&lt;2));
+t = -10:0.01:10;
+figure
+plot(t,x(t), <span class="string">'k'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'x(t) = -t.*((t&gt;=-4) &amp; (t&lt;0)) + t.*((t&gt;=0) &amp; (t&lt;2)'</span>);
+</pre><img vspace="5" hspace="5" src="P03_SyS_09.png" alt=""> <p>Para la graficaci&oacute;n de las se&ntilde;ales, &uacute;nicamente se modifica el argumento de la se&ntilde;al an&oacute;nima dentro del <i>plot</i>.</p><pre class="codeinput">figure
+plot(t,x(t-4), <span class="string">'m'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span> <span class="comment">% 1)</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'1. x(t - 4)'</span>);
+figure
+plot(t,x(t/1.5), <span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span> <span class="comment">% 2)</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'2. x(t/1.5)'</span>);
+figure
+plot(t,x(-t), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span> <span class="comment">%3)</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'3. x(-t)'</span>);
+figure
+plot(t,x(2*t-4), <span class="string">'y'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span> <span class="comment">% 4)</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'4. x(2t - 4)'</span>);
+figure
+plot(t,x(2-t), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span> <span class="comment">% 5)</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'5. x(2 - t)'</span>);
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="P03_SyS_10.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_11.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_12.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_13.png" alt=""> <img vspace="5" hspace="5" src="P03_SyS_14.png" alt=""> <h2 id="17">Ejercicio 6.</h2><p>El concepto de energ&iacute;a de una se&ntilde;al se determina como <img src="P03_SyS_eq17954830594598051770.png" alt="$$ E_f = \int_{- \infty}^{\infty}|f(t)|^2 dx$"></p><p>En Matlab, la hemos expresado como un archivo funci&oacute;n llamado <i>energia.m</i> donde qued&oacute; expresada como:</p><pre class="language-matlab">
+<span class="keyword">function</span> [E] = energia(f,A)
+
+Aux = 0; <span class="comment">%Variable auxiliar para almacenar el dato de salida </span>
+    
+<span class="keyword">for</span> i=1 : length(f) <span class="comment">%ciclo desde 1 hasta el n&uacute;mero de trozos de la expresi&oacute;n</span>
+    Aux = Aux + limit( int(abs(f(i)).^2 ,<span class="string">'t'</span>, A(i), A(i+1)), <span class="string">'t'</span>, inf );
+<span class="keyword">end</span>
+
+    E = Aux;
+<span class="keyword">end</span>
+
+
+</pre><p>Para resolver el c&aacute;lculo de la energ&iacute;a de una se&ntilde;al <i>f(t)</i>.</p><div><ul><li><b>Problema 1.1.3 (Lathi)</b> Encontrar la energ&iacute;a de <i><b>x(t) + y(t)</b></i> y <i><b>x(t) - y(t)</b></i> de los siguientes pares de se&ntilde;ales <i>x(t)</i> y <i>y(t)</i>:</li></ul></div><pre class="codeinput">p = @(dt) (dt&gt;=-0.5) &amp; (dt&lt;0.5); <span class="comment">%Se crea una funci&oacute;n an&oacute;nima para la representai&oacute;n del pulso unitario.</span>
+dt = -2:0.001:3;
+
+figure
+plot(dt, p((dt-1)/2), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'x_a(t)'</span>);
+figure
+plot(dt, p(dt-0.5)-p(dt-1.5), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'y(t)'</span>); title(<span class="string">'y_a(t)'</span>);
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'x_b(t)'</span>);
+figure
+plot(dt, p((dt-pi)/(2*pi)), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'y(t)'</span>); title(<span class="string">'y_b(t)'</span>);
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'x_c(t)'</span>);
+figure
+plot(dt, p((dt-pi/2)/pi), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'y(t)'</span>); title(<span class="string">'y_c(t)'</span>);
+</pre><p>Las se&ntilde;ales de la forma <b>x(t) + y(t)</b> quedan:</p><pre class="codeinput">dt = -2:0.001:3; figure
+plot(dt, p((dt-1)/2) + p(dt-0.5)- p(dt-1.5), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_a(t) + y_a(t)'</span>);
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi))+p((dt-pi)/(2*pi)), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_b(t) + y_b(t)'</span>);
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi)+p((dt-pi/2)/pi), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_c(t) + y_c(t)'</span>);
+</pre><p>Para el c&aacute;lculo de la energ&iacute;a, el m&eacute;todo elegido consiste en tomar como vectores los trozos de la se&ntilde;al (uno de intervalos y el otro de las expresiones), donde el vector de expresiones se transforma en simb&oacute;lica. En las variables <i>"E"</i> se almacena el resultado de la integral.</p><pre class="codeinput">syms <span class="string">t</span>
+
+Aa1 = [0 1];
+f_a1 = [2]; f_a1 = sym(f_a1);
+E_a1 = energia(f_a1, Aa1)
+
+A_b1 = [0 2*pi];
+f_b1 = [sin(t)+1]; f_b1 = sym(f_b1);
+E_b1 = energia(f_b1, A_b1)
+
+A_c1 = [0 pi];
+f_c1 = [sin(t)+1]; f_c1 = sym(f_c1);
+E_c1 = energia(f_c1, A_c1)
+</pre><pre class="codeoutput error">Undefined function 'syms' for input arguments of type 'char'.
+
+Error in P03_SyS (line 234)
+syms t
+</pre><p>Las se&ntilde;ales de la forma <b>x(t) - y(t)</b> quedan:</p><pre class="codeinput">dt = -2:0.001:3; figure
+plot(dt, p((dt-1)/2) - p(dt-0.5) + p(dt-1.5), <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_a(t) - y_a(t)'</span>);
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)) - p((dt-pi)/(2*pi)), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_b(t) - y_b(t)'</span>);
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi) - p((dt-pi/2)/pi), <span class="string">'g'</span>, <span class="string">'LineWidth'</span>, 2);
+grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); title(<span class="string">'x_c(t) - y_c(t)'</span>);
+</pre><p>La energ&iacute;a de las se&ntilde;ales <i>x(t)</i> - <i>y(t)</i> es:</p><pre class="codeinput">Aa1 = [1 2];
+f_a1 = [2]; f_a1 = sym(f_a1);
+E_a1 = energia(f_a1, Aa1)
+
+A_b1 = [0 2*pi];
+f_b1 = [sin(t)-1]; f_b1 = sym(f_b1);
+E_b1 = energia(f_b1, A_b1)
+
+A_c1 = [0 pi];
+f_c1 = [sin(t)-1]; f_c1 = sym(f_c1);
+E_c1 = energia(f_c1, A_c1)
+</pre><h2 id="22">Ejercicio 7.</h2><p>El concepto de potencia de una se&ntilde;al se determina como <img src="P03_SyS_eq03271638948342774122.png" alt="$$ P_f = \frac{1}{T} \int_{- T/2}^{T/2}|f(t)|^2 dx$"> para toda se&ntilde;al de Potencia. Cabe mencionar que toda se&ntilde;al Peri&oacute;dica es de Potencia.</p><p>En Matlab, la hemos expresado como un archivo funci&oacute;n llamado <i>potencia.m</i> donde qued&oacute; expresada como:</p><pre class="language-matlab">
+<span class="keyword">function</span> [P] = potencia(f, T, A)
+
+Aux = 0; <span class="comment">%Variable auxiliar para almacenar el dato de salida </span>
+    
+<span class="keyword">for</span> i=1 : length(f) <span class="comment">%ciclo desde 1 hasta el n&uacute;mero de trozos de la expresi&oacute;n</span>
+    Aux = Aux + (1/T)*int(abs(f(i)).^2 ,<span class="string">'t'</span>, A(i), A(i+1));
+<span class="keyword">end</span>
+
+    P = Aux;
+<span class="keyword">end</span>
+
+</pre><p>Para resolver el c&aacute;lculo de la potencia de una se&ntilde;al <i>f(t)</i>.</p><div><ul><li><b>Problema 1.1.4 (Lathi)</b> Encontrar la potencia de la se&ntilde;al peri&oacute;dica <i>x(t)</i> (abajo se muestra graficada la se&ntilde;al cont&iacute;nua en un solo per&iacute;odo), y sus variantes:</li></ul></div><div><ol><li>-x(t)</li><li>2x(t)</li><li>cx(t)</li></ol></div><p>Como se puede observar en el punto 3, la se&ntilde;al est&aacute; siendo multiplicada por un valor <i>"c"</i>; para poder utilizarlo en matlab, es necesario crear una variable simb&oacute;lica <i>"c"</i>.</p><pre class="codeinput">dt = -4:0.001:4; figure
+plot(dt, (dt.^3).*p(dt/4), <span class="string">'y'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'x(t)'</span>);
+</pre><p>La potencia de las se&ntilde;al x(t )quedar&iacute;a como:</p><pre class="codeinput">syms <span class="string">t</span> <span class="string">c</span>
+T = 4;
+A = [-2 2];
+fx = [t^3]; fx = sym(fx);
+P = potencia(fx, T, A)
+</pre><p>Para las modificaciones de la se&ntilde;al x(t), podemos observar las gr&aacute;ficas de las se&ntilde;ales en un solo per&iacute;odo (Nota: para la graficaci&oacute;n de la se&ntilde;al n&uacute;mero 3, se tomar&aacute; el valor c = \frac{1}{2}):</p><pre class="codeinput">figure
+plot(dt, (-dt.^3).*p(dt/4), <span class="string">'c'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'- x(t)'</span>);
+figure
+plot(dt, (2*dt.^3).*p(dt/4), <span class="string">'b'</span>, <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'2x(t)'</span>);
+figure
+plot(dt, (0.5*dt.^3).*p(dt/4), <span class="string">'LineWidth'</span>, 2); grid <span class="string">on</span>
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'x(t)'</span>); title(<span class="string">'c*x(t)'</span>);
+</pre><p>Al calcular las potencias de las variantes de la se&ntilde;al x(t), &eacute;stas quedan:</p><pre class="codeinput">fx1 = [-t^3]; fx1 = sym(fx1);
+P1 = potencia(fx1, T, A)
+fx2 = [2*t^3]; fx2 = sym(fx2);
+P2 = potencia(fx2, T, A)
+fx3 = [c*t^3]; fx3 = sym(fx3);
+P2 = potencia(fx3, T, A)
+</pre><h2 id="28">Referencias.</h2><div><ul><li>EduRed, <i>MATLAB</i>, autor desconocido, fecha desconocida, de EcuRed, sitio web: https://www.ecured.cu/MATLAB</li><li>The MathWorks(2013), Publishing MATLAB Code from the Editor, 2013, de Matlab, sitio web: https://www.youtube.com/watch?v=CWgl5Ylltxk</li><li>Wikipedia (2001), GNU Octave, 2019, de Wikipedia, sitio web: https://es.wikipedia.org/wiki/GNU_Octave</li><li>Wikipedia (2001), Python, 2019, de Wikipedia, sitio web: https://es.wikipedia.org/wiki/Python</li><li>https://www.youtube.com/watch?v=cBTGMNaGGW4</li></ul></div><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PRÁCTICA 3. Señales en tiempo contínuo.
+% *Autores:*
+%
+% *Acosta Villa Cristian Abraham*
+%
+% *Córdova Fernández Karla Lilia*
+%
+% *SEÑALES Y SISTEMAS, Grupo 2TV1*
+
+%% Objetivos de la práctica.
+% * Manupulación básica de MATLAB.
+% * Gráficas de señales reales y complejas contínuas.
+% * Transformación de señales contínuas (Escalamientos y traslaciones).
+% * Cálculo de energía y potencia de señales contínuas.
+
+%% Introducción.
+% Como sabemos, MATLAB es un sofware matemático, el cuál, tiene su
+% propio lenguaje de programación (Lenguaje M), y el cuál es multiplataforna.
+%%
+% Surgió por primera vez en 1984 por Cleve Moler, con el objetivo de
+% uaar paquetes de subrutinas escritas en <https://www.ecured.cu/Fortran Fortran> en los cursos
+% de Análisis Numérico y Álgebra lineal.
+% Su lenguaje fue creado en 1970, el cuál, proporcionó un acceso
+% sencillo al sofware de matrices LINPACK y EISPACK, esto sin 
+% usar Fortran.
+%%
+% Existen otras alternativas de sofware libre como <https://www.gnu.org/software/octave/ Octave>
+% y <https://www.python.org/ Python>.
+% Octave por un lado, viene siendo el equivalente de MATLAB, ya que 
+% poseé la mayoría de las características que tiene MATLAB. Por otro
+% lado, Python un lenguaje de programación multiparadigma, ya que 
+% soporta orientación a objetos y programaci´pon imperativa.
+
+%% 
+% Si quieres saber más acerca de estos sofware, puedes abrir los
+% siguientes enlaces:
+% <https://es.wikipedia.org/wiki/GNU_Octave Características Octave>
+% <https://es.wikipedia.org/wiki/Python Caracteristicas Python>
+
+%% Desarrollo.
+%
+%% Ejercicio 1: 
+% Crea una función que se llame _fun1_ y reciba dos parametros $\omega$ y $a$ la función debe regresar la evaluación 
+% $F(\omega)=a/(a^2+\omega^2)$, esta función debe trabajar con $a\in R$ y $t\in  R^n$. 
+%
+%Para este oasi sólo se tiene que crear una nueva función y escribir la ecuación, esto es.
+% *function F = fun1 (w,a)*
+% *F = a/(a^2 + b^2);*
+% *endfunction*
+%
+%% Ejercicio 2:
+% Construya una función que gráfique funciones de
+% $f:R\rightarrow R$ en el formato de su elección y pruebe
+% su código mostrando la gráfica de $F(\omega)$ vs $\omega$ en el intervalo
+% $[-2,2]$ para $a=1$, no debe
+% Para realizar esto haremos lo siguiente:
+
+w = [-2:0.0001:2];
+a = 1;
+f1 = fun1(w,a);
+figure
+plot (w,f1,'k','LineWidth',2)
+title('F(w) = a/(a^2+w^2)')
+xlabel('\omega')
+grid on
+%
+%
+%% Ejercicio 4.
+% * Ejercicio M1.1
+f = inline('exp(-t).*cos(2*pi*t)', 't');
+t = (-2:0.01:2);
+
+% M1.1 con función anónima
+f = @(t) exp(-t).*cos(2*pi*t);
+figure
+plot(t, f(t), 'r', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('f(t)'); title('f(t) = e^{-t}cos(2\pi t)');
+%%
+% * Ejercicio M1.2
+% 
+u = inline('(t>=0)', 't'); %escalón
+t = (-2:0.01:2);
+
+u = @(t) (t>=0);
+figure
+plot(t, u(t), 'g', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('u(t)'); title('Escalón con función anónima');
+axis([-2 2 -0.1 1.1]);
+
+
+p = inline('(t>=0) & (t<1)', 't'); %pulso unitario
+t = (-1:0.01:2);
+
+p = @(t) (t>=0) & (t<1); %pulso unitario
+figure
+plot(t, p(t), 'g', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('p(t)'); title('Pulso unitario con función anónima');
+axis([-2 2 -0.1 1.1]);
+%%
+% * Ejercicio M1.3
+g = inline('exp(-t).*cos(2*pi*t).*(t>=0)', 't');
+t = (-2:0.01:2);
+
+g = @(t) exp(-t).*cos(2*pi*t).*(t>=0);
+figure
+plot(t, g(t), 'b', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('g(t)'); title('g(t) = e^{-t}cos(2\pi t)*(t>=0)');
+figure
+plot(t, g(2*t+1), 'b', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('g(t)'); title('g(2t + 1)');
+figure
+plot(t, g(-t+1), 'c', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('g(t)'); title('g(-t + 1)');
+figure
+plot(t, g(2*t+1)+g(-t+1), 'c', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('g(t)'); title('g(2t + 1) + g(-t + 1)');
+%%
+% * Ejercicio M1.4
+x = inline('exp(-t).*((t>=0) & (t<1))', 't');
+t = (0:0.01:1);
+E_x = sum(x(t).*x(t)*0.01);
+x_squared = inline('exp(-2*t).*((t>=0) & (t<1))', 't');
+E_x = quad(x_squared, 0, 1);
+g_squared = inline('exp(-2*t).*((cos(2*pi*t)).^2).*(t>=0)', 't');
+t = (0:0.001:100);
+E_g = sum(g_squared(t)*0.001);
+E_g = quad(g_squared,0,100);
+
+% Con funciones anónimas:
+x_squared = @(t) exp(-2*t).*((t>=0) & (t<1));
+E_x = quad(x_squared, 0, 1);
+g_squared = @(t) exp(-2*t).*((cos(2*pi*t)).^2).*(t>=0);
+E_g = quad(g_squared,0,100);
+E_g = sum(g_squared(t)*0.001);
+%%
+% Como se puede notar en este ejercicio, podemos deducir que el uso de
+% _inline_ y las funciones anónimas, es exactamente igual, la única
+% diferencia es la sintáxis, donde *f = inline('función','variable')* , que
+% sería lo mismo a *f = @(variable) expresión* .
+%% Ejercicio 5.
+%
+% Con la señal x(t) mostrada a continuación, graficar:
+%% 
+% # x(t - 4)
+% # x(t/1.5)
+% # x(-t)
+% # x(2t - 4)
+% # x(2 - t)
+%
+x = @(t) (-t).*((t>=-4) & (t<0))+t.*((t>=0) & (t<2));
+t = -10:0.01:10;
+figure
+plot(t,x(t), 'k', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('x(t) = -t.*((t>=-4) & (t<0)) + t.*((t>=0) & (t<2)');
+%%
+% Para la graficación de las señales, únicamente se modifica el argumento
+% de la señal anónima dentro del _plot_.
+figure
+plot(t,x(t-4), 'm', 'LineWidth', 2); grid on % 1)
+xlabel('t'); ylabel('x(t)'); title('1. x(t - 4)');
+figure
+plot(t,x(t/1.5), 'c', 'LineWidth', 2); grid on % 2)
+xlabel('t'); ylabel('x(t)'); title('2. x(t/1.5)');
+figure
+plot(t,x(-t), 'b', 'LineWidth', 2); grid on %3)
+xlabel('t'); ylabel('x(t)'); title('3. x(-t)');
+figure
+plot(t,x(2*t-4), 'y', 'LineWidth', 2); grid on % 4)
+xlabel('t'); ylabel('x(t)'); title('4. x(2t - 4)');
+figure
+plot(t,x(2-t), 'g', 'LineWidth', 2); grid on % 5)
+xlabel('t'); ylabel('x(t)'); title('5. x(2 - t)');
+%
+%% Ejercicio 6.
+% El concepto de energía de una señal se determina como $$ E_f = \int_{- \infty}^{\infty}|f(t)|^2 dx$
+% 
+% En Matlab, la hemos expresado como un archivo función llamado _energia.m_ donde
+% quedó expresada como:
+%
+% <include>energia.m</include>
+% 
+% Para resolver el cálculo de la energía de una señal _f(t)_.
+%
+% * *Problema 1.1.3 (Lathi)*
+% Encontrar la energía de _*x(t) + y(t)*_ y _*x(t) - y(t)*_ de los siguientes pares de señales _x(t)_ y _y(t)_:
+%
+%
+p = @(dt) (dt>=-0.5) & (dt<0.5); %Se crea una función anónima para la representaión del pulso unitario.
+dt = -2:0.001:3;
+
+figure
+plot(dt, p((dt-1)/2), 'r', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('x_a(t)');
+figure
+plot(dt, p(dt-0.5)-p(dt-1.5), 'r', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('y(t)'); title('y_a(t)');
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('x_b(t)');
+figure
+plot(dt, p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('y(t)'); title('y_b(t)');
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('x_c(t)');
+figure
+plot(dt, p((dt-pi/2)/pi), 'g', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('y(t)'); title('y_c(t)');
+%%
+% Las señales de la forma *x(t) + y(t)* quedan:
+
+dt = -2:0.001:3; figure
+plot(dt, p((dt-1)/2) + p(dt-0.5)- p(dt-1.5), 'r', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_a(t) + y_a(t)');
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi))+p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_b(t) + y_b(t)');
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi)+p((dt-pi/2)/pi), 'g', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_c(t) + y_c(t)');
+%%
+% Para el cálculo de la energía, el método elegido consiste en tomar como
+% vectores los trozos de la señal (uno de intervalos y el otro de las
+% expresiones), donde el vector de expresiones se transforma en simbólica.
+% En las variables _"E"_ se almacena el resultado de la integral.
+
+syms t
+
+Aa1 = [0 1];
+f_a1 = [2]; f_a1 = sym(f_a1);
+E_a1 = energia(f_a1, Aa1)
+
+A_b1 = [0 2*pi];
+f_b1 = [sin(t)+1]; f_b1 = sym(f_b1);
+E_b1 = energia(f_b1, A_b1)
+
+A_c1 = [0 pi];
+f_c1 = [sin(t)+1]; f_c1 = sym(f_c1);
+E_c1 = energia(f_c1, A_c1)
+
+%%
+% Las señales de la forma *x(t) - y(t)* quedan:
+
+dt = -2:0.001:3; figure
+plot(dt, p((dt-1)/2) - p(dt-0.5) + p(dt-1.5), 'r', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_a(t) - y_a(t)');
+
+dt = -2:0.001:3*pi; figure
+plot(dt, sin(dt).*p((dt-pi)/(2*pi)) - p((dt-pi)/(2*pi)), 'b', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_b(t) - y_b(t)');
+
+dt = -2:0.001:2*pi; figure
+plot(dt, sin(dt).*p((dt-pi/2)/pi) - p((dt-pi/2)/pi), 'g', 'LineWidth', 2);
+grid on
+xlabel('t'); title('x_c(t) - y_c(t)');
+%%
+% La energía de las señales _x(t)_ - _y(t)_ es:
+Aa1 = [1 2];
+f_a1 = [2]; f_a1 = sym(f_a1);
+E_a1 = energia(f_a1, Aa1)
+
+A_b1 = [0 2*pi];
+f_b1 = [sin(t)-1]; f_b1 = sym(f_b1);
+E_b1 = energia(f_b1, A_b1)
+
+A_c1 = [0 pi];
+f_c1 = [sin(t)-1]; f_c1 = sym(f_c1);
+E_c1 = energia(f_c1, A_c1)
+
+%% Ejercicio 7.
+% El concepto de potencia de una señal se determina como $$ P_f =
+% \frac{1}{T} \int_{- T/2}^{T/2}|f(t)|^2 dx$ para toda señal de Potencia.
+% Cabe mencionar que toda señal Periódica es de Potencia.
+% 
+% En Matlab, la hemos expresado como un archivo función llamado _potencia.m_ donde
+% quedó expresada como:
+%
+% <include>potencia.m</include>
+% 
+% Para resolver el cálculo de la potencia de una señal _f(t)_.
+%
+% * *Problema 1.1.4 (Lathi)*
+% Encontrar la potencia de la señal periódica _x(t)_ (abajo se muestra graficada la señal
+% contínua en un solo período), y sus variantes:
+%%
+% 
+% # -x(t)
+% # 2x(t)
+% # cx(t)
+%
+% Como se puede observar en el punto 3, la señal está siendo multiplicada
+% por un valor _"c"_; para poder utilizarlo en matlab, es necesario crear una
+% variable simbólica _"c"_.
+%
+dt = -4:0.001:4; figure
+plot(dt, (dt.^3).*p(dt/4), 'y', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('x(t)');
+%%
+% La potencia de las señal x(t )quedaría como:
+%
+%%
+syms t c
+T = 4;
+A = [-2 2];
+fx = [t^3]; fx = sym(fx);
+P = potencia(fx, T, A)
+%%
+% Para las modificaciones de la señal x(t), podemos observar las gráficas de las señales
+% en un solo período (Nota: para la graficación de la señal número 3, se tomará el valor c = \frac{1}{2}):
+%
+figure
+plot(dt, (-dt.^3).*p(dt/4), 'c', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('- x(t)');
+figure
+plot(dt, (2*dt.^3).*p(dt/4), 'b', 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('2x(t)');
+figure
+plot(dt, (0.5*dt.^3).*p(dt/4), 'LineWidth', 2); grid on
+xlabel('t'); ylabel('x(t)'); title('c*x(t)');
+%%
+% Al calcular las potencias de las variantes de la señal x(t), éstas
+% quedan:
+%
+fx1 = [-t^3]; fx1 = sym(fx1);
+P1 = potencia(fx1, T, A)
+fx2 = [2*t^3]; fx2 = sym(fx2);
+P2 = potencia(fx2, T, A)
+fx3 = [c*t^3]; fx3 = sym(fx3);
+P2 = potencia(fx3, T, A)
+%% Referencias.
+% * EduRed, _MATLAB_, autor desconocido, fecha desconocida, de EcuRed, sitio web: https://www.ecured.cu/MATLAB
+% * The MathWorks(2013), Publishing MATLAB Code from the Editor, 2013, de Matlab, sitio web: https://www.youtube.com/watch?v=CWgl5Ylltxk
+% * Wikipedia (2001), GNU Octave, 2019, de Wikipedia, sitio web: https://es.wikipedia.org/wiki/GNU_Octave
+% * Wikipedia (2001), Python, 2019, de Wikipedia, sitio web: https://es.wikipedia.org/wiki/Python
+% * https://www.youtube.com/watch?v=cBTGMNaGGW4
+##### SOURCE END #####
+--></body></html>
